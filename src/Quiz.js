@@ -1,27 +1,50 @@
-import React, { Component } from 'react'
-import QuizQuestion from './QuizQuestion.js'
-import QuizEnd from './QuizEnd.js'
+import React, {Component} from 'react';
+import QuizQuestion from './QuizQuestion.js';
+import QuizEnd from './QuizEnd.js';
 
 //setting equal the variable to the contents of a data file
-let quizData = require('./quiz_data.json')
+let quizData = require('./quiz_data.json');
 
 class Quiz extends Component {
-  constructor(props) {
-    //calling super passing the props variable
-    super(props)
-    this.state = {quiz_position: 1 }
-  }
-  render() {
-    const isQuizEnd = ((this.state.quiz_position -1)) === quizData.quiz_questions.length)
-    //a condition that checks the value of its quiz that displays the QuizEnd component if true and the QuizQuestion component if false
-    return (
-      <div>
-        {isQuizEnd ? <QuizEnd /> :
-        <QuizQuestion quiz_question={quizData.quiz_questions
-          [this.state.quiz_position - 1]}/>}
-      </div>
-    )
-  }
-}
+    constructor(props) {
+      //calling super passing the props variable
+        super(props);
+        this.state = {
+            quiz_position: 1,
+            isQuizEnd: false
+        };
+    }
 
-export default Quiz
+    showNextQuestion() {
+        if(this.state.quiz_position === quizData.quiz_questions.length) {
+            this.setState({
+                isQuizEnd: true
+            })
+        }
+        else {
+            this.setState(prevState => ({
+                quiz_position: prevState.quiz_position + 1
+            }));
+        }
+    }
+
+    handleResetClick() {
+        this.setState({
+            quiz_position: 1
+        });
+    }
+
+    render() {
+        return <div>
+            <QuizQuestion showNextQuestionHandler={this.showNextQuestion.bind(this)} quiz_question={quizData.quiz_questions[this.state.quiz_position - 1]}/>
+            {
+                this.state.isQuizEnd ?
+                <QuizEnd resetClickHandler={this.handleResetClick.bind(this)}/> :
+                ''
+            }
+
+        </div>;
+    }
+  }
+  
+  export default Quiz;
