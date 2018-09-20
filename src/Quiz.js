@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import QuizQuestion from './QuizQuestion.js';
 import QuizEnd from './QuizEnd.js';
 
@@ -35,7 +36,15 @@ class Quiz extends Component {
     }
 
     render() {
-        return <div>
+        return ( <ReactCSSTransitionGroup
+      className="container"
+      component="div"
+      transitionName="fade"
+      transitionEnterTimeout={800}
+      transitionLeaveTimeout={500}
+      transitionAppear
+      transitionAppearTimeout={500}
+    ><div>
             <QuizQuestion showNextQuestionHandler={this.showNextQuestion.bind(this)} quiz_question={quizData.quiz_questions[this.state.quiz_position - 1]}/>
             {
                 this.state.isQuizEnd ?
@@ -43,8 +52,10 @@ class Quiz extends Component {
                 ''
             }
 
-        </div>;
+        </div>
+        </ReactCSSTransitionGroup>
+      );
     }
   }
-  
+
   export default Quiz;

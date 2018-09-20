@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class QuizEnd extends Component {
     handleResetClick() {
@@ -6,10 +7,22 @@ class QuizEnd extends Component {
     }
 
     render() {
-           return (<div>
+           return (
+             <ReactCSSTransitionGroup
+                className="container result"
+                component="div"
+                transitionName="fade"
+                transitionEnterTimeout={800}
+                transitionLeaveTimeout={500}
+                transitionAppear
+                transitionAppearTimeout={500}
+   >
+        <div>
            <p>Thanks for playing!</p>
            <a href='' onClick={this.handleResetClick.bind(this)}>Reset Quiz</a>
-         </div>);
+         </div>
+         </ReactCSSTransitionGroup>
+       );
        }
    }
 

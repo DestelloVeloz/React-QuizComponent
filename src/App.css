@@ -19,17 +19,56 @@
 ul {
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 .buttons {
   display: flex;
   justify-content: center;
   text-align: center;
 }
-button {
-  margin: 0.6em auto;
-  font-size: 1.5em;
-  display: block;
+.radioCustomLabel {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 1.5rem 2.5rem 1.5rem 5rem;
+    font-size: 16px;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.radioCustomButton {
+  position: absolute;
+  width: auto;
+  opacity: 0;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #bbb;
+  border-radius: 50%;
+  transition: all 0.3s;
 }
 .error {
   color: red;
+}
+.App-logo {
+  animation: spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
